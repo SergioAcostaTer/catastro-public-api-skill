@@ -1,0 +1,401 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Generic LLM tool definitions for Catastro public services",
+  "type": "array",
+  "items": {
+    "type": "object"
+  },
+  "x-tools": [
+    {
+      "name": "catastro_list_provinces",
+      "description": "List provinces covered by the Spanish Dirección General del Catastro public service.",
+      "input_schema": {
+        "type": "object",
+        "properties": {},
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "catastro_list_municipalities",
+      "description": "List or search municipalities in a province by name.",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "province": {
+            "type": "string"
+          },
+          "municipality": {
+            "type": "string",
+            "default": ""
+          }
+        },
+        "required": [
+          "province"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "catastro_list_streets",
+      "description": "List/search cadastral streets in a municipality.",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "province": {
+            "type": "string"
+          },
+          "municipality": {
+            "type": "string"
+          },
+          "street_type": {
+            "type": "string",
+            "default": ""
+          },
+          "street_name": {
+            "type": "string",
+            "default": ""
+          }
+        },
+        "required": [
+          "province",
+          "municipality"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "catastro_list_numbers",
+      "description": "Resolve/list street numbers and parcel references for a cadastral street.",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "province": {
+            "type": "string"
+          },
+          "municipality": {
+            "type": "string"
+          },
+          "street_type": {
+            "type": "string"
+          },
+          "street_name": {
+            "type": "string"
+          },
+          "number": {
+            "type": [
+              "string",
+              "integer"
+            ]
+          }
+        },
+        "required": [
+          "province",
+          "municipality",
+          "street_type",
+          "street_name",
+          "number"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "catastro_property_by_address",
+      "description": "Get public non-protected cadastral property data from a structured address.",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "province": {
+            "type": "string"
+          },
+          "municipality": {
+            "type": "string"
+          },
+          "street_type": {
+            "type": "string"
+          },
+          "street_name": {
+            "type": "string"
+          },
+          "number": {
+            "type": [
+              "string",
+              "integer"
+            ]
+          },
+          "block": {
+            "type": "string",
+            "default": ""
+          },
+          "staircase": {
+            "type": "string",
+            "default": ""
+          },
+          "floor": {
+            "type": "string",
+            "default": ""
+          },
+          "door": {
+            "type": "string",
+            "default": ""
+          }
+        },
+        "required": [
+          "province",
+          "municipality",
+          "street_type",
+          "street_name",
+          "number"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "catastro_property_by_reference",
+      "description": "Get public non-protected cadastral property data from a 14, 18, or 20 character cadastral reference.",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "refcat": {
+            "type": "string"
+          },
+          "province": {
+            "type": "string",
+            "default": ""
+          },
+          "municipality": {
+            "type": "string",
+            "default": ""
+          }
+        },
+        "required": [
+          "refcat"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "catastro_property_by_rural_parcel",
+      "description": "Get public non-protected cadastral property data from province, municipality, rural polygon, and parcel.",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "province": {
+            "type": "string"
+          },
+          "municipality": {
+            "type": "string"
+          },
+          "polygon": {
+            "type": "string"
+          },
+          "parcel": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "province",
+          "municipality",
+          "polygon",
+          "parcel"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "catastro_reference_at_coordinates",
+      "description": "Find the cadastral parcel reference containing coordinates. For geographic CRS use x=longitude and y=latitude.",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "x": {
+            "type": "number"
+          },
+          "y": {
+            "type": "number"
+          },
+          "srs": {
+            "type": "string",
+            "default": "EPSG:4326"
+          }
+        },
+        "required": [
+          "x",
+          "y"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "catastro_nearby_references",
+      "description": "Find cadastral references near coordinates, including distance information.",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "x": {
+            "type": "number"
+          },
+          "y": {
+            "type": "number"
+          },
+          "srs": {
+            "type": "string",
+            "default": "EPSG:4326"
+          }
+        },
+        "required": [
+          "x",
+          "y"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "catastro_coordinates_by_reference",
+      "description": "Get parcel centroid coordinates from a cadastral reference. Uses the first 14 characters as the parcel/finca reference.",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "refcat": {
+            "type": "string"
+          },
+          "srs": {
+            "type": "string",
+            "default": ""
+          },
+          "province": {
+            "type": "string",
+            "default": ""
+          },
+          "municipality": {
+            "type": "string",
+            "default": ""
+          }
+        },
+        "required": [
+          "refcat"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "catastro_parcel_geometry",
+      "description": "Fetch exact cadastral parcel geometry as INSPIRE WFS GML using the 14-character parcel reference.",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "refcat": {
+            "type": "string"
+          },
+          "srs": {
+            "type": "string",
+            "default": "EPSG::25830"
+          }
+        },
+        "required": [
+          "refcat"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "catastro_neighbor_parcels",
+      "description": "Fetch the parcel plus neighboring cadastral parcels as INSPIRE WFS GML.",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "refcat": {
+            "type": "string"
+          },
+          "srs": {
+            "type": "string",
+            "default": "EPSG::25830"
+          }
+        },
+        "required": [
+          "refcat"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "catastro_addresses_by_parcel",
+      "description": "Fetch INSPIRE address features associated with a cadastral parcel reference.",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "refcat": {
+            "type": "string"
+          },
+          "srs": {
+            "type": "string",
+            "default": "EPSG::25830"
+          }
+        },
+        "required": [
+          "refcat"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "catastro_buildings_by_parcel",
+      "description": "Fetch INSPIRE building features associated with a cadastral parcel reference.",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "refcat": {
+            "type": "string"
+          },
+          "srs": {
+            "type": "string",
+            "default": "EPSG::25830"
+          }
+        },
+        "required": [
+          "refcat"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "catastro_building_parts_by_parcel",
+      "description": "Fetch INSPIRE building-part features associated with a cadastral parcel reference.",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "refcat": {
+            "type": "string"
+          },
+          "srs": {
+            "type": "string",
+            "default": "EPSG::25830"
+          }
+        },
+        "required": [
+          "refcat"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "catastro_other_constructions_by_parcel",
+      "description": "Fetch INSPIRE other-construction features (for example pools/other mapped constructions) for a cadastral parcel reference.",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "refcat": {
+            "type": "string"
+          },
+          "srs": {
+            "type": "string",
+            "default": "EPSG::25830"
+          }
+        },
+        "required": [
+          "refcat"
+        ],
+        "additionalProperties": false
+      }
+    }
+  ]
+}

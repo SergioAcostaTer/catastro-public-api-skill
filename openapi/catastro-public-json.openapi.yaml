@@ -1,0 +1,236 @@
+openapi: 3.1.0
+info:
+  title: Spanish Catastro Public JSON API
+  version: "2026-09-skill"
+  description: >-
+    Convenience OpenAPI description of the public JSON GET endpoints exposed by
+    Dirección General del Catastro WCF services. Response schemas are intentionally
+    permissive because the service mirrors nested XML-oriented models and optional
+    result/candidate/error variants.
+servers:
+  - url: https://ovc.catastro.meh.es/OVCServWeb/OVCWcfCallejero
+paths:
+  /COVCCallejero.svc/json/ObtenerProvincias:
+    get:
+      operationId: obtenerProvincias
+      responses:
+        '200': {$ref: '#/components/responses/Json200'}
+  /COVCCallejero.svc/json/ObtenerMunicipios:
+    get:
+      operationId: obtenerMunicipios
+      parameters:
+        - {$ref: '#/components/parameters/ProvinciaReq'}
+        - {name: Municipio, in: query, required: false, schema: {type: string}}
+      responses:
+        '200': {$ref: '#/components/responses/Json200'}
+  /COVCCallejero.svc/json/ObtenerCallejero:
+    get:
+      operationId: obtenerCallejero
+      parameters:
+        - {$ref: '#/components/parameters/ProvinciaReq'}
+        - {$ref: '#/components/parameters/MunicipioReq'}
+        - {name: TipoVia, in: query, required: false, schema: {type: string}}
+        - {name: NomVia, in: query, required: false, schema: {type: string}}
+      responses:
+        '200': {$ref: '#/components/responses/Json200'}
+  /COVCCallejero.svc/json/ObtenerNumerero:
+    get:
+      operationId: obtenerNumerero
+      parameters:
+        - {$ref: '#/components/parameters/ProvinciaReq'}
+        - {$ref: '#/components/parameters/MunicipioReq'}
+        - {name: TipoVia, in: query, required: true, schema: {type: string}}
+        - {name: NomVia, in: query, required: true, schema: {type: string}}
+        - {name: Numero, in: query, required: true, schema: {type: string}}
+      responses:
+        '200': {$ref: '#/components/responses/Json200'}
+  /COVCCallejero.svc/json/Consulta_DNPLOC:
+    get:
+      operationId: consultaDnpLoc
+      parameters:
+        - {$ref: '#/components/parameters/ProvinciaReq'}
+        - {$ref: '#/components/parameters/MunicipioReq'}
+        - {name: Sigla, in: query, required: true, schema: {type: string}}
+        - {name: Calle, in: query, required: true, schema: {type: string}}
+        - {name: Numero, in: query, required: true, schema: {type: string}}
+        - {name: Bloque, in: query, required: false, schema: {type: string}}
+        - {name: Escalera, in: query, required: false, schema: {type: string}}
+        - {name: Planta, in: query, required: false, schema: {type: string}}
+        - {name: Puerta, in: query, required: false, schema: {type: string}}
+      responses:
+        '200': {$ref: '#/components/responses/Json200'}
+  /COVCCallejero.svc/json/Consulta_DNPRC:
+    get:
+      operationId: consultaDnpRc
+      parameters:
+        - {name: Provincia, in: query, required: false, schema: {type: string}}
+        - {name: Municipio, in: query, required: false, schema: {type: string}}
+        - {$ref: '#/components/parameters/RefCat14_18_20'}
+      responses:
+        '200': {$ref: '#/components/responses/Json200'}
+  /COVCCallejero.svc/json/Consulta_DNPPP:
+    get:
+      operationId: consultaDnpPp
+      parameters:
+        - {$ref: '#/components/parameters/ProvinciaReq'}
+        - {$ref: '#/components/parameters/MunicipioReq'}
+        - {name: Poligono, in: query, required: true, schema: {type: string}}
+        - {name: Parcela, in: query, required: true, schema: {type: string}}
+      responses:
+        '200': {$ref: '#/components/responses/Json200'}
+  /COVCCallejeroCodigos.svc/json/ObtenerProvincias:
+    get:
+      operationId: obtenerProvinciasCodigosService
+      responses:
+        '200': {$ref: '#/components/responses/Json200'}
+  /COVCCallejeroCodigos.svc/json/ObtenerMunicipiosCodigos:
+    get:
+      operationId: obtenerMunicipiosCodigos
+      parameters:
+        - {$ref: '#/components/parameters/CodigoProvinciaReq'}
+        - {$ref: '#/components/parameters/CodigoMunicipioOpt'}
+        - {$ref: '#/components/parameters/CodigoMunicipioIneOpt'}
+      responses:
+        '200': {$ref: '#/components/responses/Json200'}
+  /COVCCallejeroCodigos.svc/json/ObtenerCallejeroCodigos:
+    get:
+      operationId: obtenerCallejeroCodigos
+      parameters:
+        - {$ref: '#/components/parameters/CodigoProvinciaReq'}
+        - {$ref: '#/components/parameters/CodigoMunicipioOpt'}
+        - {$ref: '#/components/parameters/CodigoMunicipioIneOpt'}
+        - {name: CodigoVia, in: query, required: false, schema: {type: string}}
+      responses:
+        '200': {$ref: '#/components/responses/Json200'}
+  /COVCCallejeroCodigos.svc/json/ObtenerNumereroCodigos:
+    get:
+      operationId: obtenerNumereroCodigos
+      parameters:
+        - {$ref: '#/components/parameters/CodigoProvinciaReq'}
+        - {$ref: '#/components/parameters/CodigoMunicipioOpt'}
+        - {$ref: '#/components/parameters/CodigoMunicipioIneOpt'}
+        - {name: CodigoVia, in: query, required: true, schema: {type: string}}
+        - {name: Numero, in: query, required: true, schema: {type: string}}
+      responses:
+        '200': {$ref: '#/components/responses/Json200'}
+  /COVCCallejeroCodigos.svc/json/Consulta_DNPLOC_Codigos:
+    get:
+      operationId: consultaDnpLocCodigos
+      parameters:
+        - {$ref: '#/components/parameters/CodigoProvinciaReq'}
+        - {$ref: '#/components/parameters/CodigoMunicipioOpt'}
+        - {$ref: '#/components/parameters/CodigoMunicipioIneOpt'}
+        - {name: CodigoVia, in: query, required: true, schema: {type: string}}
+        - {name: Numero, in: query, required: true, schema: {type: string}}
+        - {name: Bloque, in: query, required: false, schema: {type: string}}
+        - {name: Escalera, in: query, required: false, schema: {type: string}}
+        - {name: Planta, in: query, required: false, schema: {type: string}}
+        - {name: Puerta, in: query, required: false, schema: {type: string}}
+      responses:
+        '200': {$ref: '#/components/responses/Json200'}
+  /COVCCallejeroCodigos.svc/json/Consulta_DNPRC_Codigos:
+    get:
+      operationId: consultaDnpRcCodigos
+      parameters:
+        - {name: CodigoProvincia, in: query, required: false, schema: {type: string}}
+        - {$ref: '#/components/parameters/CodigoMunicipioOpt'}
+        - {$ref: '#/components/parameters/CodigoMunicipioIneOpt'}
+        - {$ref: '#/components/parameters/RefCat14_18_20'}
+      responses:
+        '200': {$ref: '#/components/responses/Json200'}
+  /COVCCallejeroCodigos.svc/json/Consulta_DNPPP_Codigos:
+    get:
+      operationId: consultaDnpPpCodigos
+      parameters:
+        - {$ref: '#/components/parameters/CodigoProvinciaReq'}
+        - {$ref: '#/components/parameters/CodigoMunicipioOpt'}
+        - {$ref: '#/components/parameters/CodigoMunicipioIneOpt'}
+        - {name: Poligono, in: query, required: true, schema: {type: string}}
+        - {name: Parcela, in: query, required: true, schema: {type: string}}
+      responses:
+        '200': {$ref: '#/components/responses/Json200'}
+  /COVCCoordenadas.svc/json/Consulta_RCCOOR:
+    get:
+      operationId: consultaRcCoor
+      parameters:
+        - {$ref: '#/components/parameters/CoorX'}
+        - {$ref: '#/components/parameters/CoorY'}
+        - {$ref: '#/components/parameters/SrsReq'}
+      responses:
+        '200': {$ref: '#/components/responses/Json200'}
+  /COVCCoordenadas.svc/json/Consulta_RCCOOR_Distancia:
+    get:
+      operationId: consultaRcCoorDistancia
+      parameters:
+        - {$ref: '#/components/parameters/CoorX'}
+        - {$ref: '#/components/parameters/CoorY'}
+        - {$ref: '#/components/parameters/SrsReq'}
+      responses:
+        '200': {$ref: '#/components/responses/Json200'}
+  /COVCCoordenadas.svc/json/Consulta_CPMRC:
+    get:
+      operationId: consultaCpmRc
+      parameters:
+        - {name: Provincia, in: query, required: false, schema: {type: string}}
+        - {name: Municipio, in: query, required: false, schema: {type: string}}
+        - {name: SRS, in: query, required: false, schema: {type: string}}
+        - {name: RefCat, in: query, required: true, schema: {type: string, minLength: 14, maxLength: 14}}
+      responses:
+        '200': {$ref: '#/components/responses/Json200'}
+components:
+  parameters:
+    ProvinciaReq:
+      name: Provincia
+      in: query
+      required: true
+      schema: {type: string}
+    MunicipioReq:
+      name: Municipio
+      in: query
+      required: true
+      schema: {type: string}
+    CodigoProvinciaReq:
+      name: CodigoProvincia
+      in: query
+      required: true
+      schema: {type: string}
+    CodigoMunicipioOpt:
+      name: CodigoMunicipio
+      in: query
+      required: false
+      schema: {type: string}
+    CodigoMunicipioIneOpt:
+      name: CodigoMunicipioINE
+      in: query
+      required: false
+      schema: {type: string}
+    RefCat14_18_20:
+      name: RefCat
+      in: query
+      required: true
+      schema:
+        type: string
+        pattern: '^(?:[A-Za-z0-9]{14}|[A-Za-z0-9]{18}|[A-Za-z0-9]{20})$'
+    CoorX:
+      name: CoorX
+      in: query
+      required: true
+      schema: {type: number}
+    CoorY:
+      name: CoorY
+      in: query
+      required: true
+      schema: {type: number}
+    SrsReq:
+      name: SRS
+      in: query
+      required: true
+      schema: {type: string, example: 'EPSG:4326'}
+  responses:
+    Json200:
+      description: Catastro JSON response. Inspect the body for domain errors/candidate lists.
+      content:
+        application/json:
+          schema:
+            type: object
+            additionalProperties: true

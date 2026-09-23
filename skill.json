@@ -1,0 +1,24 @@
+{
+  "name": "catastro-public-api",
+  "version": "1.0.0",
+  "entrypoint": "SKILL.md",
+  "description": "Public Spanish Catastro integration skill for non-protected property data, coordinates, parcel geometry, INSPIRE addresses/buildings, WMS and ATOM.",
+  "references": [
+    "references/endpoints.md",
+    "references/data-model.md",
+    "references/errors.md",
+    "references/inspire.md",
+    "references/street-types.md",
+    "references/legal-and-limits.md",
+    "references/sources.md"
+  ],
+  "tool_schemas": "schemas/catastro-tools-array.json",
+  "clients": {
+    "javascript": "src/javascript/catastro-client.mjs",
+    "python": "src/python/catastro_client.py",
+    "javascript_inspire": "src/javascript/catastro-inspire.mjs",
+    "python_inspire": "src/python/catastro_inspire.py"
+  },
+  "openapi": "openapi/catastro-public-json.openapi.yaml",
+  "endpoint_registry": "schemas/endpoints.json"
+}

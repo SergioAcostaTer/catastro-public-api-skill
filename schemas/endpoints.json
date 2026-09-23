@@ -1,0 +1,52 @@
+{
+  "checked": "2026-09-23",
+  "wcf": {
+    "names": {
+      "base_json": "https://ovc.catastro.meh.es/OVCServWeb/OVCWcfCallejero/COVCCallejero.svc/json",
+      "base_rest_xml": "https://ovc.catastro.meh.es/OVCServWeb/OVCWcfCallejero/COVCCallejero.svc/rest",
+      "soap": "https://ovc.catastro.meh.es/OVCServWeb/OVCWcfCallejero/COVCCallejero.svc/soap",
+      "wsdl": "https://ovc.catastro.meh.es/OVCServWeb/OVCWcfCallejero/COVCCallejero.svc?singleWsdl",
+      "operations": [
+        "ObtenerProvincias",
+        "ObtenerMunicipios",
+        "ObtenerCallejero",
+        "ObtenerNumerero",
+        "Consulta_DNPLOC",
+        "Consulta_DNPRC",
+        "Consulta_DNPPP"
+      ]
+    },
+    "codes": {
+      "base_json": "https://ovc.catastro.meh.es/OVCServWeb/OVCWcfCallejero/COVCCallejeroCodigos.svc/json",
+      "base_rest_xml": "https://ovc.catastro.meh.es/OVCServWeb/OVCWcfCallejero/COVCCallejeroCodigos.svc/rest",
+      "soap": "https://ovc.catastro.meh.es/OVCServWeb/OVCWcfCallejero/COVCCallejeroCodigos.svc/soap",
+      "wsdl": "https://ovc.catastro.meh.es/OVCServWeb/OVCWcfCallejero/COVCCallejeroCodigos.svc?singleWsdl",
+      "operations": [
+        "ObtenerProvincias",
+        "ObtenerMunicipiosCodigos",
+        "ObtenerCallejeroCodigos",
+        "ObtenerNumereroCodigos",
+        "Consulta_DNPLOC_Codigos",
+        "Consulta_DNPRC_Codigos",
+        "Consulta_DNPPP_Codigos"
+      ]
+    },
+    "coordinates": {
+      "base_json": "https://ovc.catastro.meh.es/OVCServWeb/OVCWcfCallejero/COVCCoordenadas.svc/json",
+      "base_rest_xml": "https://ovc.catastro.meh.es/OVCServWeb/OVCWcfCallejero/COVCCoordenadas.svc/rest",
+      "soap": "https://ovc.catastro.meh.es/OVCServWeb/OVCWcfCallejero/COVCCoordenadas.svc/soap",
+      "wsdl": "https://ovc.catastro.meh.es/OVCServWeb/OVCWcfCallejero/COVCCoordenadas.svc?singleWsdl",
+      "operations": ["Consulta_CPMRC", "Consulta_RCCOOR", "Consulta_RCCOOR_Distancia"]
+    }
+  },
+  "inspire": {
+    "wfs_cp": "https://ovc.catastro.meh.es/INSPIRE/wfsCP.aspx",
+    "wfs_ad": "https://ovc.catastro.meh.es/INSPIRE/wfsAD.aspx",
+    "wfs_bu": "https://ovc.catastro.meh.es/INSPIRE/wfsBU.aspx",
+    "wms_inspire": "https://ovc.catastro.meh.es/cartografia/INSPIRE/spadgcwms.aspx",
+    "wms_general": "https://ovc.catastro.meh.es/Cartografia/WMS/ServidorWMS.aspx",
+    "atom_cp": "https://www.catastro.hacienda.gob.es/INSPIRE/CadastralParcels/ES.SDGC.CP.atom.xml",
+    "atom_ad": "https://www.catastro.hacienda.gob.es/INSPIRE/Addresses/ES.SDGC.AD.atom.xml",
+    "atom_bu": "https://www.catastro.hacienda.gob.es/INSPIRE/buildings/ES.SDGC.BU.atom.xml"
+  }
+}
